@@ -153,8 +153,8 @@ label {
   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
-/* タスクアイテム */
-.homewrok-item {
+
+/* .homewrok-item {
   font-size: 1.2em;
   font-weight: bold;
   color: #333;
@@ -167,14 +167,14 @@ label {
   background: #ffeefc;
   padding: 15px;
   transition: 0.3s linear;
-}
+} */
 
-.item-wrapper {
+/* .item-wrapper {
   display: flex;
   justify-content: flex-end;
-}
+} */
 
-.item-date {
+/* .item-date {
   background:blue;
   color: #FFF;
   padding: 7px 15px;
@@ -183,7 +183,7 @@ label {
   margin-right: 10px;
   display: flex;
   align-items: center;
-}
+} */
 
 
 

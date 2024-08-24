@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Sans+JP&family=Zen+Kaku+Gothic+New&family=Zen+Kurenaido&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+<!-- ここまで -->
+<link rel="stylesheet" href="./css/style.css">
+<script src="js/jquery-2.1.3.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <title>夏休み宿題メモ</title>
+</head>
+
+
+<body>
+    <header>
+        <h1>夏休みの宿題チェックリスト</h1>
+    </header>
+
+    <main>
+        <div class="input-area">
+            <!-- 宿題をチェックしたの日付 -->
+            <div class="date-area">
+                <label for="date">チェックした日</label>
+                <!--チェック日の入力フォーム-->
+                <input type="date" class="date" id="date">
+            </div>
+        
+            <!-- 終わった宿題の項目 -->
+            <div class="homework-area">
+                <label for="homewrok-input">終わった宿題</label>
+                <!--宿題の入力フォーム-->
+                <input type="text" class="homewrok-input" id="homewrok-input">
+            </div>
+
+             <!--きろくボタン-->
+            <button class="btn-add-btn">きろくする</button>
+            <!-- とりけしボタン -->
+            <button class="btn-del-btn">とりけし</button>
+        </div>
+
+        <div class="display-homework">
+            <!--宿題を表示する-->
+            <ol class="homework-list"></ol>
+        </div>
+    </main>
+    <!-- <footer></footer> -->
+
+    <script>
+        //1.きろく クリックイベント
+        $(".btn-add-btn").on("click",function(){
+            const value1 = $("#date").val();
+            localStorage.setItem("date",value1);
+
+            const value2 = $("#homewrok-input").val();
+            localStorage.setItem("homewrok-input",value2);
+
+            alert("きろくしました");
+        });
+
+        //2.とりけし クリックイベント
+        $(".btn-del-btn").on("click",function(){
+            const value1 = $("#date").val();
+            localStorage.setItem("date",value1);
+
+            const value2 = $("#homewrok-input").val();
+            localStorage.setItem("homewrok-input",value2);
+
+            alert("とりけしました");
+            
+        }); 
+
+        //3. ページ読み込み：保存データ取得表示
+
+
+    </script> 
+
+
+</body>
+
+
+</html>

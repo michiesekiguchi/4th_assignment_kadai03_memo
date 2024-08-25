@@ -32,12 +32,12 @@
         
             <!-- 終わった宿題の項目 -->
             <div class="homework-area">
-                <label for="homewrok-input">終わった宿題</label>
+                <label for="homework-input">終わった宿題</label>
                 <!--宿題の入力フォーム-->
-                <input type="text" class="homewrok-input" id="homewrok-input">
+                <input type="text" class="homework-input" id="homework-input">
             </div>
 
-             <!--きろくボタン-->
+            <!-- きろくボタン -->
             <button class="btn-add-btn">きろくする</button>
             <!-- とりけしボタン -->
             <button class="btn-del-btn">とりけし</button>
@@ -45,54 +45,54 @@
 
         <div class="display-homework">
             <!--宿題を表示する-->
-            <ol id="homework-list">
-            </ol>
+            <ol id="homework-list"></ol>
         </div>
     </main>
-    <!-- <footer></footer> -->
 
     <script>
-        //1.きろく クリックイベント
-        $(".btn-add-btn").on("click",function(){
-            const value1 = $("#date").val();
-            localStorage.setItem("date",value1);
+        // 1. きろく クリックイベント
+        $(".btn-add-btn").on("click", function () {
+            const dateValue = $("#date").val();
+            const homeworkValue = $("#homework-input").val();
 
-            const value2 = $("#homewrok-input").val();
-            localStorage.setItem("homewrok-input",value2);
+            if (dateValue && homeworkValue) {
+                // ローカルストレージに保存
+                localStorage.setItem("date", dateValue);
+                localStorage.setItem("homework-input", homeworkValue);
 
-            alert("きろくしました");       
+                // リストに追加
+                $("#homework-list").append(`<li>${dateValue}: ${homeworkValue}</li>`);
+
+                alert("きろくしました");
+            } else {
+                alert("日付と宿題の項目を入力してください");
+            }
         });
 
-        //2.とりけし クリックイベント
-        $(".btn-del-btn").on("click",function(){
-            const value1 = $("#date").val();
-            localStorage.removeItem("date",value1);
+        // 2. とりけし クリックイベント
+        $(".btn-del-btn").on("click", function () {
+            // ローカルストレージから削除
+            localStorage.removeItem("date");
+            localStorage.removeItem("homework-input");
 
-            const value2 = $("#homewrok-input").val();
-            localStorage.removeItem("homewrok-input",value2);
+            // リストをクリア
+            $("#homework-list").empty();
 
             alert("とりけしました");
+        });
 
-            // $("#homework-list").val("")
-            
-        }); 
+        // 3. ページ読み込み：保存データ取得表示
+        $(function () {
+            const savedDate = localStorage.getItem("date");
+            const savedHomework = localStorage.getItem("homework-input");
 
-        //3. ページ読み込み：保存データ取得表示
-
-        if(localStorage.getItem("#homework-input")){
-            const value1 =localStorage.getItem("homework-input");
-            $("#homework-list").val(value1)
-        }
-
-
-        // ロード時に表示
-
-        
-    </script> 
-
-
-
+            if (savedDate && savedHomework) {
+                $("#homework-list").append(`<li>${savedDate}: ${savedHomework}</li>`);
+            }
+        });
+    </script>
 </body>
+
 
 
 </html>

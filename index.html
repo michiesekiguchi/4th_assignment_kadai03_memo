@@ -53,22 +53,23 @@
         // ページ読み込み時にローカルストレージから宿題のリストを読み込む
         $(function () {
             const savedTasks = JSON.parse(localStorage.getItem("homework-list")) || [];
-            savedTasks.forEach(task => {
+            for (let i = 0; i < savedTasks.length; i++) {
+                const task = savedTasks[i];
                 $("#homework-list").append(`<li>${task.date}: ${task.homework}</li>`);
-            });
+            }
         });
-
+    
         // 1. きろく クリックイベント
         $(".btn-add-btn").on("click", function () {
             const dateValue = $("#date").val();
             const homeworkValue = $("#homework-input").val();
-
+    
             if (dateValue && homeworkValue) {
                 // 既存の宿題リストを取得し、新しい宿題を追加
                 const savedTasks = JSON.parse(localStorage.getItem("homework-list")) || [];
                 savedTasks.push({ date: dateValue, homework: homeworkValue });
                 localStorage.setItem("homework-list", JSON.stringify(savedTasks));
-
+    
                 // 新しい宿題をリストに追加
                 $("#homework-list").append(`<li>${dateValue}: ${homeworkValue}</li>`);
                 alert("きろくしました");
@@ -76,18 +77,20 @@
                 alert("日付と宿題の項目を入力してください");
             }
         });
-
+    
         // 2. とりけし クリックイベント
         $(".btn-del-btn").on("click", function () {
             // ローカルストレージから削除
             localStorage.removeItem("homework-list");
-
+    
             // リストをクリア
             $("#homework-list").empty();
-
+    
             alert("とりけしました");
         });
     </script>
+    
+
 </body>
 
 

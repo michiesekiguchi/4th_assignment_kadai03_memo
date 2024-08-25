@@ -50,19 +50,27 @@
     </main>
 
     <script>
+        // ページ読み込み時にローカルストレージから宿題のリストを読み込む
+        $(function () {
+            const savedTasks = JSON.parse(localStorage.getItem("homework-list")) || [];
+            savedTasks.forEach(task => {
+                $("#homework-list").append(`<li>${task.date}: ${task.homework}</li>`);
+            });
+        });
+
         // 1. きろく クリックイベント
         $(".btn-add-btn").on("click", function () {
             const dateValue = $("#date").val();
             const homeworkValue = $("#homework-input").val();
 
             if (dateValue && homeworkValue) {
-                // ローカルストレージに保存
-                localStorage.setItem("date", dateValue);
-                localStorage.setItem("homework-input", homeworkValue);
+                // 既存の宿題リストを取得し、新しい宿題を追加
+                const savedTasks = JSON.parse(localStorage.getItem("homework-list")) || [];
+                savedTasks.push({ date: dateValue, homework: homeworkValue });
+                localStorage.setItem("homework-list", JSON.stringify(savedTasks));
 
-                // リストに追加
+                // 新しい宿題をリストに追加
                 $("#homework-list").append(`<li>${dateValue}: ${homeworkValue}</li>`);
-
                 alert("きろくしました");
             } else {
                 alert("日付と宿題の項目を入力してください");
@@ -72,23 +80,12 @@
         // 2. とりけし クリックイベント
         $(".btn-del-btn").on("click", function () {
             // ローカルストレージから削除
-            localStorage.removeItem("date");
-            localStorage.removeItem("homework-input");
+            localStorage.removeItem("homework-list");
 
             // リストをクリア
             $("#homework-list").empty();
 
             alert("とりけしました");
-        });
-
-        // 3. ページ読み込み：保存データ取得表示
-        $(function () {
-            const savedDate = localStorage.getItem("date");
-            const savedHomework = localStorage.getItem("homework-input");
-
-            if (savedDate && savedHomework) {
-                $("#homework-list").append(`<li>${savedDate}: ${savedHomework}</li>`);
-            }
         });
     </script>
 </body>
